@@ -1,0 +1,33 @@
+[
+    {
+        "id": 11,
+        "name": "Cold Coffee",
+        "price": 120,
+        "image": "../../static/img/imgs/coldcoffee.png"
+    },
+    {
+        "id": 12,
+        "name": "Tea",
+        "price": 10,
+        "image": "../../static/img/imgs/tea.png"
+    },
+    {
+        "id": 13,
+        "name": "Hot Chocolate",
+        "price": 30,
+        "image": "../../static/img/imgs/hot_choco.png"
+    }
+    ,
+    {
+        "id": 14,
+        "name": "Espresso",
+        "price": 150,
+        "image": "../../static/img/imgs/espresso.png"
+    },
+    {
+        "id": 15,
+        "name": "Coffee",
+        "price": 15,
+        "image": "../../static/img/imgs/coffee.png"
+    }
+]

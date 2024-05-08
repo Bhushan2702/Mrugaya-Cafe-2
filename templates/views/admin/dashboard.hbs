@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Murgaya Cafe Admin Dashboard</title>
+  <!-- Include jsPDF library -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.4.0/jspdf.umd.min.js"></script>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+      background-color: #f9f9f9; /* Light gray background */
+    }
+
+    .container {
+      padding: 20px;
+    }
+
+    h1 {
+      text-align: center;
+      color: #333; /* Dark text color */
+      margin-top: 20px;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 20px;
+      background-color: #fff; /* White background color for the table */
+      border-radius: 8px; /* Rounded corners for the table */
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Shadow effect for the table */
+    }
+
+    th,
+    td {
+      border: 1px solid #dddddd;
+      text-align: left;
+      padding: 12px;
+    }
+
+    th {
+      background-color: #f2f2f2; /* Light gray background for table header */
+      color: #333; /* Dark text color */
+    }
+
+    tr:nth-child(even) {
+      background-color: #f9f9f9; /* Light gray background for even rows */
+    }
+
+    tr:hover {
+      background-color: #f2f2f2; /* Darker gray background on hover */
+    }
+  </style>
+</head>
+
+<body>
+  <div class="container">
+    <h1>Mrugaya Cafe Admin Dashboard</h1>
+    <table id="order-table">
+      <thead>
+        <tr>
+          <th>User</th>
+          <th>Ordered Items</th>
+          <th>Quantities</th>
+          <th>Item Price</th>
+          <!-- <th>Total Price</th> -->
+        </tr>
+      </thead>
+      <tbody>
+        {{#each orders}}
+        <tr>
+          <td>{{this.name}}</td>
+          <td>
+            {{#each this.menu_items}}
+            <div>{{this}}</div> <!-- Display each item on a new line -->
+            {{/each}}
+          </td>
+          <td>{{this.item_quantity}}</td>
+          <td>{{this.price}}</td>
+          <!-- <td>{{this.totalPrice}}</td> -->
+        </tr>
+        {{/each}}
+      </tbody>
+    </table>
+  </div>
+</body>
+
+</html>

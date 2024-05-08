@@ -1,0 +1,45 @@
+[
+    {
+        "id": 21,
+        "name": "Veg Grilled Sandwich",
+        "price": 30,
+        "image": "../../static/img/imgs/sandwich_veggrilled.png"
+    },
+    {
+        "id": 22,
+        "name": "Bombay Sandwich",
+        "price": 30,
+        "image": "../../static/img/imgs/sandwich_bombay.png"
+    },
+    {
+        "id": 23,
+        "name": "Corn Mayo Sandwich",
+        "price": 45,
+        "image": "../../static/img/imgs/sandwich_cornmayo.png"
+    }
+    ,
+    {
+        "id": 24,
+        "name": "Cheese Grilled Sandwich",
+        "price": 45,
+        "image": "../../static/img/imgs/sandwich_cheesegrilled.png"
+    },
+    {
+        "id": 25,
+        "name": "Cheese Chilli Toast",
+        "price": 50,
+        "image": "../../static/img/imgs/sandwich_cheesechillitoast.jpg"
+    },
+    {
+        "id": 26,
+        "name": "Cheese Onion Toast",
+        "price": 50,
+        "image": "../../static/img/imgs/sandwich_onion.png"
+    },
+    {
+        "id": 27,
+        "name": "Cheese Onion Capsicum",
+        "price": 50,
+        "image": "../../static/img/imgs/sandwich_cheeseonion.png"
+    }
+]

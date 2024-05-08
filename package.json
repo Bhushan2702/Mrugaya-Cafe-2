@@ -1,0 +1,42 @@
+{
+  "name": "nsshbs",
+  "version": "1.0.0",
+  "description": "NSS-KK Wagh",
+  "main": "app.js",
+  "scripts": {
+    "start": "nodemon src/app.js -e js,hbs",
+    "build": "build src/app.js -e js,hbs"
+  },
+  "keywords": [
+    "Awesome"
+  ],
+  "author": "Yash",
+  "license": "ISC",
+  "dependencies": {
+    "bcryptjs": "^2.4.3",
+    "body-parser": "^1.20.2",
+    "connect-flash": "^0.1.1",
+    "cookie-parser": "^1.4.6",
+    "dotenv": "^16.3.1",
+    "exif": "^0.6.0",
+    "exif-parser": "^0.1.12",
+    "express": "^4.19.2",
+    "express-session": "^1.17.3",
+    "fs": "^0.0.1-security",
+    "geolocation": "^0.2.0",
+    "hbs": "^4.2.0",
+    "html-pdf": "^3.0.1",
+    "jsonwebtoken": "^9.0.1",
+    "moment": "^2.29.4",
+    "mongoose": "^7.4.1",
+    "multer": "^1.4.5-lts.1",
+    "pdf-lib": "^1.17.1",
+    "pdfkit": "^0.13.0",
+    "png-js": "^1.0.0",
+    "qrcode": "^1.5.3",
+    "xlsx": "^0.18.5"
+  },
+  "devDependencies": {
+    "nodemon": "^3.1.0"
+  }
+}

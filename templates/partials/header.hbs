@@ -1,0 +1,205 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
+        integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+    <link href='https://unpkg.com/boxicons@2.0.9/css/boxicons.min.css' rel='stylesheet'>
+    {{!--
+    <script src="https://kit.fontawesome.com/1d9e82c9c0.js" crossorigin="anonymous"></script> --}}
+    <link rel="stylesheet" href="../static/style.css">
+    <!-- <title>NSS - KK Wagh College</title> -->
+</head>
+
+<body>
+    <div class="container-fluid d-flex flex-row align-items-center" id="top" style="height: 150px;">
+        <img id="collegelogo" src="../static/img/logos/brand_logo.png" class="img-fluid" alt="College Logo">
+        {{!-- <div class="container p0" id="marq">
+            <marquee behavior="scroll" scrollamount="5" height="160px" style="margin-top: 40px;" width="500px">
+                <h1 style="font-size: 55px;">NOT ME BUT YOU</h1>
+            </marquee>
+        </div> --}}
+        <img id="nsslogo" src="../static/img/logos/nsslogo.png" class="img-fluid" alt="NSS Logo">
+    </div>
+
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-lg navbar-dark sticky-top navbg ">
+        <a class="navbar-brand" href="/">
+            <img src="../static/img/logos/logo.jpg" alt="Logo" style="border-radius: 50%;" width="35" height="35">
+            NSS</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav mr-auto" id="navbar-ul">
+                <li class="nav-item ">
+                    <a class="nav-link {{home}}" href="/">Home <span class="sr-only">(current)</span></a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link {{about}}" href="/about">About</a>
+                </li>
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
+                        data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        Topics
+                    </a>
+                    <div class="dropdown-menu" id="dropdown-menu" aria-labelledby="navbarDropdown">
+                        <a class="dropdown-item" href="#">Technology</a>
+                        <a class="dropdown-item" href="#">Web Development</a>
+                        <a class="dropdown-item" href="#">Support</a>
+                        <a class="dropdown-item" href="#">Write for us</a>
+                    </div>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link {{contact}}" href="/contact">Contact Us</a>
+                </li>
+                <li class="nav-item ">
+                    <a class="nav-link {{faq}}" href="/faq">FAQ's</a>
+                </li>
+            </ul>
+            {{!-- <form class="form-inline my-2 my-lg-0">
+                <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
+                <button class="btn btn-outline-light my-2 my-sm-0" type="submit">Search</button>
+            </form> --}}
+            <div class="mx-2">
+                <button class="btn btn-danger" data-toggle="modal" data-target="#loginModal">Login</button>
+                <button class="btn btn-danger" data-toggle="modal" data-target="#signupModal">SignUp</button>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Login Modal -->
+    <div class="modal fade" id="loginModal" tabindex="-1" role="dialog" aria-labelledby="loginModalLabel"
+        aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Login</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <form action="/login" method="POST">
+                        <div class="form-group">
+                            <label for="exampleInputEmail1">NSS Roll No</label>
+                            <input type="number" name="roll" class="form-control" id="exampleInputEmail1"
+                                aria-describedby="emailHelp" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="exampleInputPassword1">Password</label>
+                            <input type="password" name="pass" class="form-control" id="exampleInputPassword1" required>
+                        </div>
+                        <button type="submit" class="btn btn-primary">Login</button>
+                    </form>
+                </div>
+                <div class="container">
+                    No Account ?
+                    <a href="" data-dismiss="modal" data-toggle="modal" data-target="#signupModal">Sign Up</a>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Sign Up Modal -->
+    <div class="modal fade" id="signupModal" tabindex="-1" role="dialog" aria-labelledby="signupModalLabel"
+        aria-hidden="true">
+        <div class="modal-dialog modal-lg" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Get an Account</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <form action="/register" method="POST" id="register-form">
+                        <div class="fields">
+                            <div class="mb-3 form-group">
+                                <div class="input-group">
+                                    <input type="text" name="firstname" class="form-control" placeholder="First Name"
+                                        required>
+                                </div>
+                            </div>
+                            <div class="mb-3 form-group">
+                                <div class="input-group">
+                                    <input type="text" name="middlename" class="form-control" placeholder="Middle Name"
+                                        required>
+                                </div>
+                            </div>
+                            <div class="mb-3 form-group">
+                                <div class="input-group">
+                                    <input type="text" name="lastname" class="form-control" placeholder="Last Name"
+                                        required>
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <input type="email" name="email" class="form-control" aria-describedby="emailHelp"
+                                    placeholder="Email Address" required>
+                                <small id="emailHelp" class="form-text text-muted">We'll never share your email with
+                                    anyone else.</small>
+                            </div>
+                            <div class="mb-3 form-group">
+                                <div class="input-group">
+                                    <input type="number" name="nssroll" min="1" max="249" class="form-control"
+                                        placeholder="NSS Roll No" required>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <select name="gender" class=" input-group form-control"
+                                    aria-label="Default select example" required>
+                                    <option disabled selected>Gender</option>
+                                    <option value="Male">Male</option>
+                                    <option value="Female">Female</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <div class="input-group">
+                                    <input type="number" name="mobile" class="form-control" min="1111111111"
+                                        placeholder="Mobile No" max="9999999999" required>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <div class="input-group">
+                                    <input type="password" name="password" class=" form-control" placeholder="Password"
+                                        required>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <div class="input-group">
+                                    <input type="password" name="conpass" class="input-group form-control"
+                                        placeholder="Confirm Password" required>
+                                </div>
+                            </div>
+                            <div id="message"></div>
+                            <div class="mb-3 form-group">
+                                <div class="input-group">
+                                    <button type="submit" name="submit" class="btn btn-primary">Creat Account</button>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+                <div class="container">
+                    Already Registered ?
+                    <a href="" data-dismiss="modal" data-toggle="modal" data-target="#loginModal">Login</a>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>

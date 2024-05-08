@@ -1,0 +1,39 @@
+[
+    {
+        "id": 1,
+        "name": "Spicy Delicious Pizza",
+        "price": 120,
+        "image": "../../static/img/imgs/spicy_delicious.png"
+    },
+    {
+        "id": 2,
+        "name": "Corn Pizza",
+        "price": 100,
+        "image": "../../static/img/imgs/corn_pizza.png"
+    },
+    {
+        "id": 3,
+        "name": "Margherita Pizza",
+        "price": 80,
+        "image": "../../static/img/imgs/margherita.png"
+    }
+    ,
+    {
+        "id": 4,
+        "name": "Maxican Pizza",
+        "price": 150,
+        "image": "../../static/img/imgs/maxican.png"
+    },
+    {
+        "id": 5,
+        "name": "Paneer Pizza",
+        "price": 120,
+        "image": "../../static/img/imgs/paneer_pizza.png"
+    },
+    {
+        "id": 6,
+        "name": "Veggie Pizza",
+        "price": 110,
+        "image": "../../static/img/imgs/veggie.png"
+    }
+]

@@ -1,0 +1,58 @@
+<!-- NAVBAR -->
+<nav>
+    <i class='bx bx-menu'></i>
+    <a href="#" class="nav-link">Categories</a>
+    <form action="/admin/adminpanel/search" method="POST">
+        <div class="form-input">
+            <input type="search" name="index" placeholder="Search...">
+            <button type="submit" class="search-btn"><i class='bx bx-search'></i></button>
+        </div>
+    </form>
+    <input type="checkbox" id="switch-mode" class="swt" hidden>
+    <label for="switch-mode" class="switch-mode"></label>
+    {{#Access access}}
+    <a href="#" class="notification">
+        <i class='bx bxs-bell' id="bell"></i>
+        <span class="num" id="count">{{newMsg}}</span>
+    </a>
+    {{/Access}}
+    <a href="" class="profile">
+        <img src="">
+    </a>
+</nav>
+<div class="offcanva" id="offcanva">
+    <form action="/mark-as-read" method="Post">
+    <button id="button">X</button>
+    </form>
+    <form action="/clear-all-messages" method="POST">
+    <button>Clear All</button>
+    </form>
+    <div class="messages">
+        {{#each activity}}
+        <div class="msg">{{this.msg}}<span>{{Timestamp this.time}}</span></div>
+{{/each}}
+    </div>
+</div>
+<!-- NAVBAR -->
+
+<script>
+
+    const button = document.getElementById('button');
+    const bell = document.getElementById('bell');
+    const count = document.getElementById('count');
+    const offcanva = document.getElementById('offcanva');
+    if(count.textContent == 0){
+        count.style.display = 'none';
+    }else{
+        count.style.display = 'block';
+    }
+    button.addEventListener('click', () => {
+        offcanva.style.display = 'none';
+        count.textContent = 0;
+        count.style.display = 'none';
+    })
+    bell.addEventListener('click', () => {
+        offcanva.style.display = 'block';
+    })
+
+</script>

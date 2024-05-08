@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cart</title>
+</head>
+
+<body>
+    <h1>Cart</h1>
+    <div id="cart-items"></div>
+    <button id="place-order-btn">Place Order</button>
+
+    <div class="container">
+        <a href="{{previousPageUrl}}" class="btn btn-primary"> Back </a>
+    </div>
+
+    <a href="/" class="my-2">Home</a>
+    <script>
+        const itemPrices = {{{ items_data }}};
+        console.log(itemPrices);
+        // Define getItemPrice function to retrieve the price of the item
+        function getItemPrice(itemName,quantity) {
+            // Find the item in itemsData array by itemName
+            const item = itemPrices.find(item => item.item_name === itemName);
+            if (item) {
+                return item.price*quantity;
+            } else {
+                // If the item is not found, return a default price or handle the error
+                return 0; // Example: Return 0 as the default price
+            }
+        }
+
+        document.addEventListener("DOMContentLoaded", function () {
+            const cartItemsDiv = document.getElementById('cart-items');
+            // Function to fetch cart items from local storage and populate the cart
+            function populateCart() {
+                const cart = JSON.parse(localStorage.getItem('cart')) || {};
+                // Clear previous cart items
+                cartItemsDiv.innerHTML = '';
+                // Populate cart with items, quantities, and quantity modification buttons
+                let cartIsEmpty = true;
+                for (let itemName in cart) {
+                    let quantity = cart[itemName];
+                    if (quantity > 0) {
+                        cartIsEmpty = false;
+                        const itemDiv = document.createElement('div');
+                        itemDiv.textContent = `${itemName}: `;
+                        const decreaseBtn = document.createElement('button');
+                        decreaseBtn.textContent = '-';
+                        decreaseBtn.addEventListener('click', function () {
+                            updateQuantity(itemName, quantity - 1);
+                        });
+                        itemDiv.appendChild(decreaseBtn);
+                        const quantitySpan = document.createElement('span');
+                        quantitySpan.textContent = quantity;
+                        itemDiv.appendChild(quantitySpan);
+                        const increaseBtn = document.createElement('button');
+                        increaseBtn.textContent = '+';
+                        increaseBtn.addEventListener('click', function () {
+                            updateQuantity(itemName, quantity + 1);
+                        });
+                        itemDiv.appendChild(increaseBtn);
+                        cartItemsDiv.appendChild(itemDiv);
+                    }
+                }
+                return cartIsEmpty;
+            }
+
+            // Function to update quantity of item in local storage
+            function updateQuantity(itemName, newQuantity) {
+                const cart = JSON.parse(localStorage.getItem('cart')) || {};
+                cart[itemName] = newQuantity;
+                localStorage.setItem('cart', JSON.stringify(cart));
+                populateCart();
+            }
+
+            // Populate cart when the page loads
+            const cartIsEmpty = populateCart();
+
+            // Event listener for Place Order button
+            document.getElementById('place-order-btn').addEventListener('click', async function () {
+                if (cartIsEmpty) {
+                    alert('Your cart is empty. Please add items to your cart before placing an order.');
+                    return;
+                }
+
+                const confirmation = confirm('Are you sure you want to place the order?');
+                if (confirmation) {
+                    try {
+                        // Get cart data from local storage
+                        const cart = JSON.parse(localStorage.getItem('cart')) || {};
+                        // Extract menu items, their quantities, and their prices from cart data
+                        const menuItems = [];
+                        const itemQuantities = [];
+                        const itemPrices = [];
+                        for (let itemName in cart) {
+                            let quantity = cart[itemName];
+                            if (quantity > 0) {
+                                menuItems.push(itemName);
+                                itemQuantities.push(quantity);
+                                // Retrieve the price of the item from your data source
+                                const itemPrice = getItemPrice(itemName,quantity); // Example function to retrieve the price
+                                itemPrices.push(itemPrice);
+                            }
+                        }
+                        // Get user data from session
+                        const sessionData = {{{ sessionData }}};
+                const name = sessionData.name;
+                const mobile_no = sessionData.mobile_no;
+                const table_no = sessionData.table_no;
+
+                // Prepare order data
+                const orderData = {
+                    name,
+                    mobile_no,
+                    table_no,
+                    menu_items: menuItems.join(', '), // Join menu items into a comma-separated string
+                    item_quantity: itemQuantities.join(', '), // Join item quantities into a comma-separated string
+                    price: itemPrices.join(', '), // Join item prices into a comma-separated string
+                };
+                // Send API request to place the order
+                const response = await fetch('/place-order', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify(orderData)
+                });
+
+                // Handle response
+                if (response.ok) {
+                    alert('Order placed successfully!');
+                    // Clear the cart in local storage
+                    localStorage.removeItem('cart');
+                    // Refresh the cart display
+                    populateCart();
+                    window.location.href = '/';
+                } else {
+                    // Handle error response
+                    const errorMessage = await response.text();
+                    alert('Failed to place order: ' + errorMessage);
+                }
+
+            } catch (error) {
+                // Handle network or other errors
+                console.error('Error placing order:', error);
+                alert('Failed to place order. Please try again later.');
+            }
+        }
+    });
+});
+
+
+    </script>
+
+</body>
+
+</html>

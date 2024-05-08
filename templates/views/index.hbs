@@ -1,0 +1,338 @@
+<!DOCTYPE html>
+<html lang="en" data-bs-theme="dark">
+<!--data-bs-theme="dark" id used to make our page dark -->
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>FoodGallery</title>
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <link rel="stylesheet" href="../../static//login.css">
+</head>
+
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+<link rel="stylesheet" href="../../static/style.css">
+<link rel="stylesheet" href="../../static/homepage.css">
+<link rel="stylesheet" href="../../static/login.css">
+
+
+<body>
+
+    <header class="p-3 text-bg-dark Header">
+        <div class="container">
+            <div class="d-flex flex-wrap align-items-center justify-content-center justify-content-lg-start">
+                <a hsref="/" class="d-flex align-items-center mb-2 mb-lg-0 text-white text-decoration-none">
+                    <svg class="bi me-2" width="40" height="32" role="img" aria-label="Bootstrap">
+                        <use xlink:href="#bootstrap"></use>
+                    </svg>
+                </a>
+                <a href="/"
+                    class="d-flex align-items-center mb-3 mb-md-0 me-md-auto link-body-emphasis text-decoration-none">
+                    <svg class="bi me-2" width="40" height="32">
+                        <use xlink:href="#bootstrap"></use>
+                    </svg>
+                    <span class="fs-4" style="color: aliceblue;"><img src="../../static/img/imgs/logo3.png"
+                            style="height: 50px; margin-right: 0.3rem;" alt="logo">Mrugaya</span>
+                </a>
+                <ul class="nav nav-pills col-12 col-lg-auto me-lg-auto mb-2 justify-content-center mb-md-0">
+                    <li class="nav-item"><a href="#home" class="nav-link px-2 text-white">Home</a></li>
+                    <li class="nav-item"><a href="#snacks" class="nav-link px-2 text-white">Snacks</a></li>
+                    <!-- <li class="nav-item"><a href="#groceries" class="nav-link px-2 text-white">Groceries</a></li> -->
+                    <li class="nav-item"><a href="#aboutus" class="nav-link px-2 text-white">About us</a></li>
+
+                </ul>
+
+
+
+
+                <!-- <a href="#" class="logo"><i class="fa fa-cutlery" aria-hidden="true"></i> Grocery</a> -->
+                <!--Used to insert logo beside grocery-->
+                <div class="icons">
+                    {{#if name}}
+                    <button type="button" class=" btn btn-primary"
+                        style="margin-right: 0.4rem;">Welcome {{name}}</button>
+                    {{else}}
+                    <button type="button" class=" btn btn-primary" id="login-btn"
+                        style="margin-right: 0.4rem;">Login </button>
+                {{/if}}
+                </div>  
+
+            </div>
+        </div>
+
+        <!-- Login form -->
+        <div class="login-form">
+            <form action="/login" method="POST" onsubmit="return validateForm()">
+                <div class="login-btn"><b>LOGIN NOW</b></div>
+                <div class="email"><input type="text" id="name" name="name" placeholder="Name"></div>
+                <div class="password">
+                    <input type="text" id="mobile_no" name="mobile_no" placeholder="Mobile No" required>
+                </div>
+                <button class="login_here" type="submit">Login</button>
+            </form>
+        </div>
+        
+        <script>
+            function validateForm() {
+                console.log("Form validation started."); // Check if the function is being called
+        
+                var mobileNo = document.getElementById("mobile_no").value;
+                console.log("Mobile number:", mobileNo); // Check the value of the mobile number input
+        
+                // Regular expression to match 10-digit mobile numbers
+                var mobileNoPattern = /^\d{10}$/;
+                console.log("Pattern test result:", mobileNoPattern.test(mobileNo)); // Check if the regex pattern test passes
+        
+                if (!mobileNoPattern.test(mobileNo)) {
+                    alert("Please enter a valid 10-digit mobile number.");
+                    return false;
+                }
+                return true;
+            }
+        </script>
+        
+        
+        
+        
+
+
+        </div>
+        </div>
+
+        <div class="iconCart">
+            <img src="../../static/img/imgs/cart2.png">
+            <div class="totalQuantity">0</div>
+        </div>
+
+
+        <div class="cart">
+            <h2>
+                CART
+            </h2>
+
+            <div class="listCart">
+
+
+                <div class="item">
+                    <img src="../../static/img/imgs/cart2.png">
+                    <div class="content">
+                        <div class="name">CoPilot / Black / Automatic</div>
+                        <div class="price">Rs.550 / 1 product</div>
+                    </div>
+                    <div class="quantity">
+                        <button>-</button>
+                        <span class="value">3</span>
+                        <button>+</button>
+                    </div>
+                </div>
+
+
+            </div>
+
+            <div class="buttons">
+                <div class="close">
+                    CLOSE
+                </div>
+                <div class="checkout">
+                    <a href="/checkout">CHECKOUT</a>
+                </div>
+            </div>
+        </div>
+        <!-- <div class="iconCart" style="display: flex; background-color: white;  height: 2.1rem; width: 2.1rem; margin-left: 2.1rem;">
+            <img src="images/icon.png"> -->
+    </header>
+
+
+
+    <div data-bs-spy="scroll" data-bs-target="#navbar-example2" data-bs-root-margin="0px 0px -40%"
+        data-bs-smooth-scroll="true" class="scrollspy-example bg-body-tertiary p-3 rounded-2" tabindex="0">
+        <h1 id="home" style="text-align: center;"></h1>
+        <div class="px-3 py-2 my-2 text-center">
+            <h1 class="addimg" style="padding-top: 5rem;">MRUGAYA</h1>
+            <img class="d-block mx-auto mb-2" src="../../static/img/imgs/logo3.png" alt="logo" width="300px" height="300px">
+            <h1 class="display-5 fw-bold text-body-emphasis">Khao aur kho jao...!!!</h1>
+            <div class="col-lg-6 mx-auto">
+                <p class="lead mb-4">At <b>Mrugaya</b>, your health is our priority, and we invite you to experience the
+                    convenience and safety of shopping with us.</p>
+
+            </div>
+
+            <div style="display: inline-block; position: absolute; right: 1rem; position: fixed; top: 80%; right: 2rem; margin: 1rem; ">
+                <a href="static/menu.html">
+                <button style="background:transparent;border-radius: 2.5rem;box-shadow: 0px 4px 8px rgba(173, 170, 170, 0.6);"><img src="static/img/imgs/pngwing.com.png" alt="" style="height: 5rem; width: 5rem;"></button>
+                </a>
+            </div>
+        </div>
+
+
+        <div class="container col-lg-7 col-sm-12">
+            <!-- <div class="milkshake">
+                <img src="milkshake.png" alt="milkshake" style="height: 350px; width: 350px;">
+            </div> -->
+            {{!-- <div id="carouselExampleIndicators" class="carousel slide col-lg-7 col-sm-12">
+                <div class="carousel-indicators">
+                    <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="0"
+                        class="active" aria-current="true" aria-label="Slide 1"></button>
+                    <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="1"
+                        aria-label="Slide 2"></button>
+                    <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="2"
+                        aria-label="Slide 3"></button>
+                </div>
+                <div class="carousel-inner">
+
+                    <div class="carousel-item active">
+                        <img src="../../static/img/imgs/Mexican-Pizza.jpg.webp" style="height: 30rem; width: 30rem;"
+                            class="d-block w-100" alt="...">
+                    </div>
+                    <div class="carousel-item ">
+                        <img src="../../static/img/imgs/panipuri2.png" style="height: 30rem; width: 30rem;"
+                            class="d-block w-100" alt="...">
+                    </div>
+                    <div class="carousel-item">
+                        <img src="../../static/img/imgs/bhel2.png" class="d-block w-100" style="height: 30rem; width: 30rem;"
+                            alt="...">
+                    </div>
+
+                </div>
+                <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators"
+                    data-bs-slide="prev">
+                    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                    <span class="visually-hidden">Previous</span>
+                </button>
+                <button class="carousel-control-next" type="b4tton" data-bs-target="#carouselExampleIndicators"
+                    data-bs-slide="next">
+                    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                    <span class="visually-hidden">Next</span>
+                </button>
+
+            </div> --}}
+            <!-- <div>
+                <img src="milkshake.png" alt="milkshake" style="height: 350px; width: 350px;">
+            </div> -->
+
+
+
+        </div>
+        <div class="container gallery">
+            
+            <img src="static/img/imgs/gallery1.jpg" alt="">
+            <img src="static/img/imgs/gallery2.jpg" alt="">
+            <img src="static/img/imgs/gallery3.jpg" alt="">
+        </div>
+
+        <br><br><hr>
+        
+
+        <h1 id="snacks" style="text-align: center; padding-top: 3rem; padding-bottom: 3rem;">Snacks</h1>
+
+
+        <div class="scroll-container" style="overflow: auto;">
+            <div class=" d-flex">
+
+
+
+                <div class="col-3 logos">
+
+                    <a href="/pizza"><img src="../../static/img/imgs/pizza2.png" class="card-img-top" alt="panipuri"></a>
+                    <div style="text-align: center;">
+                        <h5>Pizza</h5>
+                    </div>
+                </div>
+
+
+
+                <div class="col-3 logos">
+                    <a href="/coffee"><img src="../../static/img/imgs/strong_hot_coffee.png" class="card-img-top" alt="panipuri"></a>
+                    <div style="text-align: center;">
+                        <h5>All-Time Classics</h5>
+                    </div>
+                </div>
+
+                <div class="col-3 logos">
+
+                    <a href="/sandwich"><img src="../../static/img/imgs/sandwich_veggrilled.png" class="card-img-top"
+                            alt="panipuri"></a>
+                    <div style="text-align: center;">
+                        <h5>Sandwiches</h5>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <hr>
+
+        <h1 id="aboutus" style="text-align: center; padding-top: 3rem; padding-bottom: 3rem;">About us</h1>
+
+        <div class="container">
+            <footer class="row row-cols-1 row-cols-sm-2 row-cols-md-5 py-2 my-3">
+                <div class="col mb-3">
+                    <a href="/" class="d-flex align-items-center mb-3 link-body-emphasis text-decoration-none">
+                        <svg class="bi me-2" width="40" height="32">
+                            <use xlink:href="#bootstrap"></use>
+                        </svg>
+                    </a>
+                    <p class="text-body-secondary">© Nilay Technologies pvt. ltd.</p>
+                </div>
+
+                <div class="col mb-3">
+
+                </div>
+
+                <div class="col mb-3">
+                    <h5>Company</h5>
+                    <ul class="nav flex-column">
+                        <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-body-secondary">Home</a></li>
+                        <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-body-secondary">About</a></li>
+                        <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-body-secondary">Team</a></li>
+                        <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-body-secondary">FAQs</a></li>
+                        <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-body-secondary">About</a></li>
+                    </ul>
+                </div>
+
+                <div class="col mb-3">
+                    <h5>Contact us</h5>
+                    <ul class="nav flex-column">
+                        <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-body-secondary">Help</a></li>
+                        <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-body-secondary">Work with us</a>
+                        </li>
+                        <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-body-secondary">Ride with us</a>
+                        </li>
+                    </ul>
+                </div>
+
+                <div class="col mb-3">
+                    <h5>Legal</h5>
+                    <ul class="nav flex-column">
+                        <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-body-secondary">Terms and
+                                conditions</a></li>
+                        <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-body-secondary">Cookie policy</a>
+                        </li>
+                        <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-body-secondary">Privacypolicy</a>
+                        </li>
+                    </ul>
+                </div>
+
+                <a href="https://api.whatsapp.com/send?phone=7350526210&text=Hello, krishna...!"
+                    style="display: table; font-family: sans-serif; text-decoration: none; margin: 1em auto; color: #fff; font-size: 0.9em; padding: 1em 2em 1em 3.5em; border-radius: 2em; font-weight: bold; background: #25d366 url('https://tochat.be/click-to-chat-directory/css/whatsapp.svg') no-repeat 1.5em center; background-size: 1.6em;">Contact
+                    on WhatsApp</a>
+
+                <!-- <a href="https://api.whatsapp.com/send?phone=7350526210&text=Hello this is the starting message">Whatsapp Chat</a> -->
+            </footer>
+        </div>
+
+    </div>
+
+
+    <script src="../../static/login.js"></script>
+    <script src="../../static/checkout.js"></script>
+    <script src="../../static/app.js"></script>
+    <script src="static/app.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
+        crossorigin="anonymous"></script>
+</body>
+
+</html>

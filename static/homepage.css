@@ -1,0 +1,84 @@
+.card:hover {
+    box-shadow: 0 .2rem 0.5rem rgb(96, 96, 240);
+}
+.Header{
+    z-index: 9999;
+}
+#carouselExampleIndicators {
+    width: 50%;
+    /* height: 30rem; */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.col-lg-7 {
+    width: 100%;
+    /* height: 30rem; */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+}
+
+.scroll-container .d-flex .logos img{
+    aspect-ratio: 3/2;
+    object-fit: contain;
+}
+
+.addimg {
+    font-weight: bolder;
+    font-size: 70px;
+    color: rgba(249, 194, 84, 0.874);
+    text-align: center;
+    display: inline-block;
+    padding-top: 0.5rem;
+
+}
+
+
+header .totalQuantity
+{
+    position: absolute;
+    top: 15px;
+    right: 5px;
+    font-size: small;
+    background-color: #b31010;
+    width: 20px;
+    height: 20px;
+    color: #fff;
+    font-weight: bold;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 50%;
+    transform: translateX(2px);
+}
+
+header .fa-cart-plus:hover{
+    cursor: pointer;
+}
+.gallery{
+    display: flex;
+    width: 50%;
+    height: 300px;
+    gap: 5px;
+    padding-top: 2rem;
+    padding-bottom: 2rem;
+    justify-content: center;
+}
+
+.gallery > img{
+    width: 50%;
+    height: 300px;
+    aspect-ratio: 3/2;
+    object-fit: cover;
+    border-radius: 10px;
+    transition: all ease 0.5s;
+}
+.gallery >img:hover{
+    width: 100%;
+    height: 300px;
+    scale: 1.1;
+    box-shadow: 0px 4px 8px rgba(173, 170, 170, 0.5);
+}

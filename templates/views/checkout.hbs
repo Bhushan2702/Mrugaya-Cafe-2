@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="../../static/style.css">
+</head>
+
+<body>
+
+    <div class="container">
+        <div class="checkoutLayout">
+            <div class="returnCart">
+                <a href="/">keep shopping</a>
+                <h1>List Product in Cart</h1>
+                <div class="list">
+
+                    <div class="item">
+                        <img src="../../static/img/imgs/1.webp">
+                        <div class="info">
+                            <div class="name">PRODUCT 1</div>
+                            <div class="price">Rs.20/1 product</div>
+                        </div>
+                        <div class="quantity">5</div>
+                        <div class="returnPrice">Rs.100</div>
+                    </div>
+                    <div class="item">
+                        <img src="../../static/img/imgs/1.webp">
+                        <div class="info">
+                            <div class="name">PRODUCT 2</div>
+                            <div class="price">Rs.30/1 product</div>
+                        </div>
+                        <div class="quantity">5</div>
+                        <div class="returnPrice">Rs.150.3</div>
+                    </div>
+
+                </div>
+            </div>
+
+            <div class="right">
+                <h1>Checkout</h1>
+
+                <!-- <div class="form">    
+                <div class="group">
+                    <label for="country">Country</label>
+                    <select name="country" id="country">
+                        <option value="">Choose..</option>
+                        <option value="">Kingdom</option>
+                    </select>
+                </div>
+            </div> -->
+
+                <div class="return">
+                    <div class="row">
+                        <div>Total Quantity</div>
+                        <div class="totalQuantity" id="totalQuantity">70</div>
+                    </div>
+                    <div class="row">
+                        <div>Total Price</div>
+                        <div class="totalPrice" id="totalPrice">Rs.900</div>
+                    </div>
+                </div>
+                <button class="buttonCheckout">CHECKOUT</button>
+            </div>
+        </div>
+    </div>
+
+
+    <script src="../../static/checkout.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            const checkoutButton = document.querySelector('.buttonCheckout');
+
+            checkoutButton.addEventListener('click', function () {
+                // Extract order data from the DOM
+                const sessionData = {{{ sessionData }}};
+        let name = sessionData.name;
+        const mobile_no = sessionData.mobile_no;
+
+        // Extract item details from each item in the cart
+        const items = document.querySelectorAll('.item');
+        const menu_items = [];
+        const item_quantity = [];
+        const price = [];
+
+        items.forEach(item => {
+            const itemName = item.querySelector('.name').textContent.trim();
+            const itemQuantity = parseInt(item.querySelector('.quantity').textContent.trim());
+            const itemPrice = parseFloat(item.querySelector('.returnPrice').textContent.trim().substring(3)); // Remove 'Rs.' and parse as float
+
+            menu_items.push(itemName);
+            item_quantity.push(itemQuantity);
+            price.push(itemPrice);
+        });
+
+        // Calculate total quantity and price
+        const totalQuantity = document.getElementById('totalQuantity').innerHTML;
+        const totalPrice = document.getElementById('totalPrice').innerHTML;
+
+        // Send order data to server
+        const orderData = {
+            name,
+            mobile_no,
+            menu_items: menu_items.join(', '),
+            item_quantity: item_quantity.join(', '),
+            price: price.join(', '),
+        };
+
+        // Make a POST request to place the order
+        fetch('/place-order', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(orderData)
+        })
+            .then(response => {
+                if (response.ok) {
+                    // Make a separate POST request to generate the bill PDF
+                    return fetch('/generate-bill-pdf', {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json'
+                        },
+                        body: JSON.stringify(orderData) // Use the same orderData as before
+                    })
+                        .then(pdfResponse => {
+                            if (pdfResponse.ok) {
+                                // If order is placed successfully, generate and download PDF
+                                alert("Order Placed Successfully!");
+                                // Clear session storage
+                                sessionStorage.clear();
+                                document.cookie = "listCart=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
+                                return pdfResponse.blob();
+                            }
+                            throw new Error('Failed to generate bill PDF');
+                        })
+                        .then(blob => {
+                            // Create a blob URL for the PDF
+                            const url = window.URL.createObjectURL(blob);
+
+                            // Create a link element to trigger the download
+                            const a = document.createElement('a');
+                            a.href = url;
+                            a.download = 'bill.pdf';
+
+                            // Append the link to the document body and trigger the download
+                            document.body.appendChild(a);
+                            a.click();
+
+                            // Revoke the blob URL to free up memory
+                            window.URL.revokeObjectURL(url);
+                            window.location.href='/';
+                        })
+                        .catch(error => {
+                            console.error('Error generating bill PDF:', error);
+                            // Handle errors
+                        });
+                } else {
+                    throw new Error('Failed to place order');
+                }
+            })
+            .catch(error => {
+                console.error('Error placing order:', error);
+                // Handle errors
+            });
+    });
+});
+
+    </script>
+</body>
+
+</html>
